@@ -1,0 +1,131 @@
+{
+    "name": "PlayerInputActions",
+    "maps": [
+        {
+            "name": "Main",
+            "id": "837ff2bc-6d97-488a-9cc7-9d7847f07d05",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "d8eaaaef-1240-488a-bc0d-6a369624710d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "18efab6a-b8d6-4dd7-b060-acd1309dbf7d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "WASD",
+                    "id": "d9b19e42-95a1-4a01-8f0b-b47b02ee6207",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "97373ce2-9082-42d9-aa22-365e51a70b91",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "8ba38c07-38b0-42c3-867c-3cccbac76749",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Arrow",
+                    "id": "cfea692d-bdb9-4efd-96f1-b7d3fe814dd8",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "39106b2f-0f73-488d-8c16-49d3849c7ef4",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "15337145-80af-4b11-88d9-12d6194e36f2",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "69f59d28-7bca-4385-aabc-d01a95c16c33",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b1629c22-8278-4abd-98ef-bcb53711cb71",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa879927-9210-41d1-9801-944befb16167",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
