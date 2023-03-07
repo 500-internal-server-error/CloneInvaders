@@ -976,7 +976,7 @@ GameObject:
   - component: {fileID: 454669850}
   m_Layer: 0
   m_Name: Enemies
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1718,8 +1718,8 @@ MonoBehaviour:
   enemyContainer: {fileID: 454669847}
   enemyHorizontalMovementSpeed: 0.25
   enemyVerticalMovementSpeed: 0.02
+  moveDirection: 1
   tmp: {fileID: 1159665328}
-  score: 0
 --- !u!1001 &1021415506
 PrefabInstance:
   m_ObjectHideFlags: 0

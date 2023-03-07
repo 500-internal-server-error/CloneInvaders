@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -39,14 +40,21 @@ public class GameController : MonoBehaviour {
 	private int moveDirection = 1;
 	private Vector2 targetPosition;
 
+	[Header("Score Management")]
+
 	[SerializeField]
 	private TextMeshProUGUI tmp;
 
-	[SerializeField]
 	private int score = 0;
+
+	List<EnemyController> enemies = new List<EnemyController>();
 
 	private void Start() {
 		shootCooldownTimer = shootCooldown;
+
+		foreach (EnemyController enemy in GetComponentsInChildren<EnemyController>()) {
+			enemies.Add(enemy);
+		}
 
 		ResizeEnemyContainer();
 	}
@@ -59,12 +67,10 @@ public class GameController : MonoBehaviour {
 			if (sceneChangeTimer <= 0) SceneManager.LoadScene(menuSceneIndexInBuildSettings);
 		}
 
-		EnemyController[] enemies = GetComponentsInChildren<EnemyController>();
-
-		if (enemies.Length > 0 && shootCooldownTimer <= 0) {
-			enemies[Random.Range(0, enemies.Length)].Shoot(laserSpeed);
+		if (enemies.Count > 0 && shootCooldownTimer <= 0) {
+			enemies[Random.Range(0, enemies.Count)].Shoot(laserSpeed);
 			shootCooldownTimer = shootCooldown;
-		} else if (enemies.Length <= 0) {
+		} else if (enemies.Count <= 0) {
 			if (!sceneChangeTimerActive) {
 				sceneChangeTimer = sceneChangeDelay;
 				sceneChangeTimerActive = true;
@@ -77,43 +83,54 @@ public class GameController : MonoBehaviour {
 	}
 
 	private void ResizeEnemyContainer() {
-		EnemyController[] enemies = enemyContainer.GetComponentsInChildren<EnemyController>();
+		Bounds bounds = new Bounds();
+		foreach (EnemyController enemy in enemies) bounds.Encapsulate(enemy.GetComponent<BoxCollider2D>().bounds);
+		// if (enemies.Count > 0) {
+		// 	bounds = enemies[0].GetComponent<BoxCollider2D>().bounds;
+		// 	for (int i = 1; i < enemies.Count; i++) {
+		// 		bounds.Encapsulate(enemies[i].GetComponent<BoxCollider2D>().bounds);
+		// 	}
+        // }
 
-		float minPointX = Mathf.Infinity;
-		float minPointY = Mathf.Infinity;
+        enemyContainer.GetComponent<BoxCollider2D>().size = bounds.size;
+        enemyContainer.GetComponent<BoxCollider2D>().offset = bounds.center - enemyContainer.transform.position;
+		// EnemyController[] enemies = enemyContainer.GetComponentsInChildren<EnemyController>();
 
-		float maxPointX = Mathf.NegativeInfinity;
-		float maxPointY = Mathf.NegativeInfinity;
+		// float minPointX = Mathf.Infinity;
+		// float minPointY = Mathf.Infinity;
 
-		foreach (EnemyController enemy in enemies) {
-			SpriteRenderer enemySpriteRenderer = enemy.GetComponent<SpriteRenderer>();
+		// float maxPointX = Mathf.NegativeInfinity;
+		// float maxPointY = Mathf.NegativeInfinity;
 
-			minPointX = Mathf.Min(minPointX, enemySpriteRenderer.bounds.min.x);
-			minPointY = Mathf.Min(minPointY, enemySpriteRenderer.bounds.min.y);
+		// foreach (EnemyController enemy in enemies) {
+		// 	SpriteRenderer enemySpriteRenderer = enemy.GetComponent<SpriteRenderer>();
 
-			maxPointX = Mathf.Max(maxPointX, enemySpriteRenderer.bounds.max.x);
-			maxPointY = Mathf.Max(maxPointY, enemySpriteRenderer.bounds.max.y);
-		}
+		// 	minPointX = Mathf.Min(minPointX, enemySpriteRenderer.bounds.min.x);
+		// 	minPointY = Mathf.Min(minPointY, enemySpriteRenderer.bounds.min.y);
 
-		Vector2 minPoint = new Vector2(minPointX, minPointY);
-		Vector2 maxPoint = new Vector2(maxPointX, maxPointY);
+		// 	maxPointX = Mathf.Max(maxPointX, enemySpriteRenderer.bounds.max.x);
+		// 	maxPointY = Mathf.Max(maxPointY, enemySpriteRenderer.bounds.max.y);
+		// }
 
-		enemyContainer.GetComponent<BoxCollider2D>().size = maxPoint - minPoint;
+		// Vector2 minPoint = new Vector2(minPointX, minPointY);
+		// Vector2 maxPoint = new Vector2(maxPointX, maxPointY);
 
-		Debug.Log("min: " + minPoint);
-		Debug.Log("max: " + maxPoint);
-		Debug.Log("delta: " + (maxPoint - minPoint));
-		Debug.Log("count: " + enemies.Length);
+		// enemyContainer.GetComponent<BoxCollider2D>().size = maxPoint - minPoint;
+
+		// Debug.Log("min: " + minPoint);
+		// Debug.Log("max: " + maxPoint);
+		// Debug.Log("delta: " + (maxPoint - minPoint));
+		// Debug.Log("count: " + enemies.Length);
 	}
 
 	public void FlipEnemyMovementDirection() {
-		Debug.Log("flip");
 		moveDirection *= -1;
 		enemyContainer.transform.position += Vector3.down * enemyVerticalMovementSpeed;
 	}
 
-	public void OnEnemyDie() {
+	public void OnEnemyDie(EnemyController enemy) {
 		score++;
+		enemies.Remove(enemy);
 		ResizeEnemyContainer();
 	}
 }

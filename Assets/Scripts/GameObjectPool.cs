@@ -12,7 +12,7 @@ public class GameObjectPool : MonoBehaviour {
 			_instance = this;
 		} else {
 			Debug.LogWarning("Attempted to instantiate multiple instances of singleton GameObjectPool, self-destructing.");
-			Destroy(gameObject);
+			Object.Destroy(this);
 		}
 	}
 
@@ -74,7 +74,7 @@ public class GameObjectPool : MonoBehaviour {
 		Transform container = transform.Find(obj.tag);
 
 		if (container == null) {
-			Debug.LogWarning("Attempted to destroy non-pooled GameObject!");
+			Debug.LogWarning("Attempted to destroy a non-pooled GameObject!");
 			return;
 		}
 

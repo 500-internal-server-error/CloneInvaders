@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour {
 
 			Destroy(gameObject);
 			GameObjectPool.instance.Destroy(collider.gameObject);
-			gameController.OnEnemyDie();
+			gameController.OnEnemyDie(this);
 		}
 	}
 
