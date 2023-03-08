@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 10367804}
   - component: {fileID: 10367806}
   - component: {fileID: 10367808}
-  - component: {fileID: 10367805}
+  - component: {fileID: 10367810}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -234,29 +234,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &10367805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 10367801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff548330ca3eaf647896dae69ce81007, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  menuSceneIndexInBuildSettings: 0
-  sceneChangeDelay: 1.2
-  rigidbody: {fileID: 10367804}
-  speed: 1.5
-  horizontalLimit: 2.5
-  playerInput: {fileID: 10367806}
-  playerLaserPrefab: {fileID: 133608513138116687, guid: bc40432fa787c774db9513576758c467, type: 3}
-  laserSpeed: 3
-  shootCooldown: 1
-  explosionPrefab: {fileID: 5807887032793161502, guid: 921d91d1af27f2041858fae1688a1231, type: 3}
-  audioSource: {fileID: 10367809}
 --- !u!114 &10367806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,6 +414,29 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &10367810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 10367801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff548330ca3eaf647896dae69ce81007, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menuSceneIndexInBuildSettings: 1
+  sceneChangeDelay: 1.2
+  rigidbody: {fileID: 10367804}
+  speed: 1.5
+  horizontalLimit: 2.5
+  playerInput: {fileID: 10367806}
+  playerLaserPrefab: {fileID: -3470066115872092656, guid: bc40432fa787c774db9513576758c467, type: 3}
+  laserSpeed: 3
+  shootCooldown: 1
+  explosionPrefab: {fileID: 6867273469407040687, guid: 921d91d1af27f2041858fae1688a1231, type: 3}
+  audioSource: {fileID: 10367809}
 --- !u!1001 &76567790
 PrefabInstance:
   m_ObjectHideFlags: 0

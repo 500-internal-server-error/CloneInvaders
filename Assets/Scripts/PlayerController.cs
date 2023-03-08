@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour {
 	[Header("Player Shooting")]
 
 	[SerializeField]
-	private GameObject playerLaserPrefab;
+	private SelfDestructableGameObject playerLaserPrefab;
 
 	[SerializeField]
 	private float laserSpeed = 3.0f;
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour {
 	private bool hasPowerup = false;
 
 	[SerializeField]
-	private GameObject explosionPrefab;
+	private SelfDestructableGameObject explosionPrefab;
 
 	[SerializeField]
 	private AudioSource audioSource;
@@ -89,10 +89,12 @@ public class PlayerController : MonoBehaviour {
 		if (collider.tag == "EnemyLaser" || collider.tag == "Enemy") {
 			GameObjectPool.instance.Instantiate(explosionPrefab, transform.position, Quaternion.identity);
 
+			if (!collider.TryGetComponent<LaserController>(out LaserController laser)) return;
+			GameObjectPool.instance.Destroy(laser);
+
 			if (hasPowerup) {
 				hasPowerup = false;
 			} else {
-				GameObjectPool.instance.Destroy(collider.gameObject);
 				Destroy(GetComponent<SpriteRenderer>());
 				speed = 0;
 
@@ -104,7 +106,7 @@ public class PlayerController : MonoBehaviour {
 		} else if (collider.tag == "Powerup") {
 			hasPowerup = true;
 
-			GameObjectPool.instance.Destroy(collider.gameObject);
+			GameObjectPool.instance.Destroy(collider.GetComponent<Powerup>());
 		}
 	}
 
@@ -113,19 +115,19 @@ public class PlayerController : MonoBehaviour {
 
 		GameObject laserCenter = GameObjectPool.instance.Instantiate(playerLaserPrefab, transform.position, Quaternion.identity);
 		laserCenter.GetComponent<Rigidbody2D>().velocity = new Vector2(0, laserSpeed);
-		GameObjectPool.instance.Destroy(laserCenter, 2.0f);
+		GameObjectPool.instance.Destroy(laserCenter.GetComponent<LaserController>(), 2.0f);
 
 
 		if (hasPowerup) {
 			GameObject laserLeft = GameObjectPool.instance.Instantiate(playerLaserPrefab, transform.position, Quaternion.identity);
 			laserLeft.transform.rotation = Quaternion.Euler(0, 0, 30.0f);
 			laserLeft.GetComponent<Rigidbody2D>().velocity = laserLeft.transform.rotation * new Vector2(0, laserSpeed);
-			GameObjectPool.instance.Destroy(laserLeft, 2.0f);
+			GameObjectPool.instance.Destroy(laserLeft.GetComponent<LaserController>(), 2.0f);
 
 			GameObject laserRight = GameObjectPool.instance.Instantiate(playerLaserPrefab, transform.position, Quaternion.identity);
 			laserRight.transform.rotation = Quaternion.Euler(0, 0, -30.0f);
 			laserRight.GetComponent<Rigidbody2D>().velocity = laserRight.transform.rotation * new Vector2(0, laserSpeed);
-			GameObjectPool.instance.Destroy(laserRight, 2.0f);
+			GameObjectPool.instance.Destroy(laserRight.GetComponent<LaserController>(), 2.0f);
 		}
 
 		audioSource.PlayOneShot(audioSource.clip);

@@ -85,42 +85,9 @@ public class GameController : MonoBehaviour {
 	private void ResizeEnemyContainer() {
 		Bounds bounds = new Bounds();
 		foreach (EnemyController enemy in enemies) bounds.Encapsulate(enemy.GetComponent<BoxCollider2D>().bounds);
-		// if (enemies.Count > 0) {
-		// 	bounds = enemies[0].GetComponent<BoxCollider2D>().bounds;
-		// 	for (int i = 1; i < enemies.Count; i++) {
-		// 		bounds.Encapsulate(enemies[i].GetComponent<BoxCollider2D>().bounds);
-		// 	}
-        // }
 
         enemyContainer.GetComponent<BoxCollider2D>().size = bounds.size;
         enemyContainer.GetComponent<BoxCollider2D>().offset = bounds.center - enemyContainer.transform.position;
-		// EnemyController[] enemies = enemyContainer.GetComponentsInChildren<EnemyController>();
-
-		// float minPointX = Mathf.Infinity;
-		// float minPointY = Mathf.Infinity;
-
-		// float maxPointX = Mathf.NegativeInfinity;
-		// float maxPointY = Mathf.NegativeInfinity;
-
-		// foreach (EnemyController enemy in enemies) {
-		// 	SpriteRenderer enemySpriteRenderer = enemy.GetComponent<SpriteRenderer>();
-
-		// 	minPointX = Mathf.Min(minPointX, enemySpriteRenderer.bounds.min.x);
-		// 	minPointY = Mathf.Min(minPointY, enemySpriteRenderer.bounds.min.y);
-
-		// 	maxPointX = Mathf.Max(maxPointX, enemySpriteRenderer.bounds.max.x);
-		// 	maxPointY = Mathf.Max(maxPointY, enemySpriteRenderer.bounds.max.y);
-		// }
-
-		// Vector2 minPoint = new Vector2(minPointX, minPointY);
-		// Vector2 maxPoint = new Vector2(maxPointX, maxPointY);
-
-		// enemyContainer.GetComponent<BoxCollider2D>().size = maxPoint - minPoint;
-
-		// Debug.Log("min: " + minPoint);
-		// Debug.Log("max: " + maxPoint);
-		// Debug.Log("delta: " + (maxPoint - minPoint));
-		// Debug.Log("count: " + enemies.Length);
 	}
 
 	public void FlipEnemyMovementDirection() {

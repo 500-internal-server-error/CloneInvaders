@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ddd06e37c7f1e3479a12bd28905f0fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLaserPrefab: {fileID: 3407011325595039447, guid: d56e0aaf023160c4993c327e53839cf9, type: 3}
-  explosionPrefab: {fileID: 5807887032793161502, guid: 921d91d1af27f2041858fae1688a1231, type: 3}
-  powerupPrefab: {fileID: 7910202936184782652, guid: 783fa0efefb2bbd498b21f95e64b9946, type: 3}
+  enemyLaserPrefab: {fileID: -6171434139447795015, guid: d56e0aaf023160c4993c327e53839cf9, type: 3}
+  explosionPrefab: {fileID: 6867273469407040687, guid: 921d91d1af27f2041858fae1688a1231, type: 3}
+  powerupPrefab: {fileID: 7910202936184782784, guid: 783fa0efefb2bbd498b21f95e64b9946, type: 3}
   powerupDropChance: 0.5

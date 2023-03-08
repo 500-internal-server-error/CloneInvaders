@@ -1,11 +1,8 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameObjectPool : MonoBehaviour {
 	public static GameObjectPool instance { get { return _instance; } }
 	private static GameObjectPool _instance;
-
-	private static Dictionary<GameObject, float> destroyTimers = new Dictionary<GameObject, float>();
 
 	private void Start() {
 		if (_instance == null) {
@@ -16,31 +13,7 @@ public class GameObjectPool : MonoBehaviour {
 		}
 	}
 
-	private void Update() {
-		List<GameObject> expiredTimers = new List<GameObject>();
-		List<GameObject> unexpiredTimers = new List<GameObject>();
-
-		foreach (KeyValuePair<GameObject, float> kvp in destroyTimers) {
-			if (kvp.Key == null) continue;
-
-			if (kvp.Value <= 0) {
-				expiredTimers.Add(kvp.Key);
-			} else {
-				unexpiredTimers.Add(kvp.Key);
-			}
-		}
-
-		foreach (GameObject expiredTimer in expiredTimers) {
-			expiredTimer.SetActive(false);
-			destroyTimers.Remove(expiredTimer);
-		}
-
-		foreach (GameObject unexpiredTimer in unexpiredTimers) {
-			destroyTimers[unexpiredTimer] -= Time.deltaTime;
-		}
-	}
-
-	public GameObject Instantiate(GameObject original, Vector3 position, Quaternion rotation) {
+	public GameObject Instantiate(SelfDestructableGameObject original, Vector3 position, Quaternion rotation) {
 		Transform container = transform.Find(original.tag);
 
 		if (container == null) {
@@ -60,17 +33,13 @@ public class GameObjectPool : MonoBehaviour {
 			}
 		}
 
-		GameObject newObject = Object.Instantiate(original, position, rotation);
+		GameObject newObject = Object.Instantiate(original.gameObject, position, rotation);
 		newObject.transform.SetParent(container);
 
 		return newObject;
 	}
 
-	public void Destroy(GameObject obj) {
-		Destroy(obj, 0);
-	}
-
-	public void Destroy(GameObject obj, float t) {
+	public void Destroy(SelfDestructableGameObject obj, float t = 0) {
 		Transform container = transform.Find(obj.tag);
 
 		if (container == null) {
@@ -78,6 +47,6 @@ public class GameObjectPool : MonoBehaviour {
 			return;
 		}
 
-		destroyTimers[obj] = t;
+		obj.SelfDestruct(t);
 	}
 }
