@@ -1711,7 +1711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 620743f82b07f40449a33cb346c1dcf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuSceneIndexInBuildSettings: 0
+  menuSceneIndexInBuildSettings: 1
   sceneChangeDelay: 1.2
   laserSpeed: 2
   shootCooldown: 3
